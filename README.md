@@ -2,8 +2,8 @@
 
 ## TODO
 
+- [x] Basic UI
 - [] Deploy (vercel)
-- [] Basic UI
 - [] Set up db (vercel)
 - [] connect db to UI
 - [] Add user auth (clerk)
