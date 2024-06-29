@@ -3,9 +3,9 @@
 ## TODO
 
 - [x] Basic UI
-- [] Deploy (vercel)
-- [] Set up db (vercel)
-- [] connect db to UI
+- [x] Deploy (vercel)
+- [x] Set up db (vercel)
+- [x] connect db to UI
 - [] Add user auth (clerk)
 - [] create recipe
 - [] Error management (sentry)

@@ -1,3 +1,5 @@
+import { db } from "~/server/db";
+
 const mockRecipes = [
   {
     id: 1,
@@ -57,9 +59,20 @@ const mockRecipes = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await db.query.posts.findMany();
+
   return (
     <main className="flex flex-row items-center justify-center space-x-6 py-6">
+      {posts.map((post) => (
+        <div
+          key={post.id}
+          className="w-96 space-y-6 rounded-lg bg-slate-500 p-4 shadow-lg"
+        >
+          <h2 className="text-2xl font-bold">{post.name}</h2>
+        </div>
+      ))}
+
       {mockRecipes.map((recipe) => {
         return (
           <div
