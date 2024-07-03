@@ -1,8 +1,9 @@
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage() {
+async function Recipes() {
   const recipes = await db.query.recipe.findMany({
     with: {
       ingredients: true,
@@ -11,7 +12,7 @@ export default async function HomePage() {
   });
 
   return (
-    <main className="flex flex-row items-center justify-center space-x-6 py-6">
+    <div>
       {recipes.map((recipe) => {
         return (
           <div
@@ -43,6 +44,19 @@ export default async function HomePage() {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+export default async function HomePage() {
+  return (
+    <main className="flex flex-row items-center justify-center space-x-6 py-6">
+      <SignedOut>
+        <div className="text-5xl">Please sign in</div>
+      </SignedOut>
+      <SignedIn>
+        <Recipes />
+      </SignedIn>
     </main>
   );
 }
