@@ -8,7 +8,7 @@
 - [x] connect db to UI
 - [x] add user auth (clerk)
 - [x] queries
-- [ ] set up shadui
+- [x] set up shadui
 - [ ] create recipe
 - [ ] error management (sentry)
 - [ ] routing (parallel route)

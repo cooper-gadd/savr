@@ -49,7 +49,9 @@ export default async function HomePage() {
   return (
     <main className="flex items-center justify-center py-6">
       <SignedOut>
-        <div className="text-5xl">Please sign in</div>
+        <div className="text-5xl">
+          Welcome to Savr, a sleek and intuitive recipe manager.
+        </div>
       </SignedOut>
       <SignedIn>
         <Recipes />
