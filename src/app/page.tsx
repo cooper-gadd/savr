@@ -1,24 +1,13 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { db } from "~/server/db";
+import { getRecipes } from "~/server/queries";
 
 export const dynamic = "force-dynamic";
 
 async function Recipes() {
-  const user = auth();
-
-  if (!user.userId) throw new Error("Unauthorized");
-
-  const recipes = await db.query.recipe.findMany({
-    where: (recipes, { eq }) => eq(recipes.userId, user.userId),
-    with: {
-      ingredients: true,
-      instructions: true,
-    },
-  });
+  const recipes = await getRecipes();
 
   return (
-    <div>
+    <div className="flex flex-row space-x-6">
       {recipes.map((recipe) => {
         return (
           <div
@@ -56,7 +45,7 @@ async function Recipes() {
 
 export default async function HomePage() {
   return (
-    <main className="flex flex-row items-center justify-center space-x-6 py-6">
+    <main className="flex items-center justify-center py-6">
       <SignedOut>
         <div className="text-5xl">Please sign in</div>
       </SignedOut>

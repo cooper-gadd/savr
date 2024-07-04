@@ -1,7 +1,12 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { relations, sql } from "drizzle-orm";
+import {
+  type InferInsertModel,
+  type InferSelectModel,
+  relations,
+  sql,
+} from "drizzle-orm";
 import {
   index,
   integer,
@@ -39,6 +44,10 @@ export const recipe = createTable(
   }),
 );
 
+export type Recipe = InferSelectModel<typeof recipe>;
+export type CreateRecipe = InferInsertModel<typeof recipe>;
+export type UpdateRecipe = Partial<CreateRecipe>;
+
 export const recipeRelations = relations(recipe, ({ many }) => ({
   ingredients: many(ingredient),
   instructions: many(instruction),
@@ -67,6 +76,10 @@ export const ingredientRelations = relations(ingredient, ({ one }) => ({
   }),
 }));
 
+export type Ingredient = InferSelectModel<typeof ingredient>;
+export type CreateIngredient = InferInsertModel<typeof ingredient>;
+export type UpdateIngredient = Partial<CreateIngredient>;
+
 export const instruction = createTable("instruction", {
   id: serial("id").primaryKey(),
   step: text("step").notNull(),
@@ -89,3 +102,7 @@ export const instructionRelations = relations(instruction, ({ one }) => ({
     references: [recipe.id],
   }),
 }));
+
+export type Instruction = InferSelectModel<typeof instruction>;
+export type CreateInstruction = InferInsertModel<typeof instruction>;
+export type UpdateInstruction = Partial<CreateInstruction>;

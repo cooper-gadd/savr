@@ -2,13 +2,15 @@
 
 ## TODO
 
-- [x] Basic UI
-- [x] Deploy (vercel)
-- [x] Set up db (vercel)
+- [x] basic UI
+- [x] deploy (vercel)
+- [x] set up db (vercel)
 - [x] connect db to UI
-- [x] Add user auth (clerk)
+- [x] add user auth (clerk)
+- [x] queries
+- [ ] set up shadui
 - [ ] create recipe
-- [ ] Error management (sentry)
+- [ ] error management (sentry)
 - [ ] routing (parallel route)
 - [ ] update recipe
 - [ ] delete recipe
