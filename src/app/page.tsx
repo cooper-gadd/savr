@@ -1,4 +1,14 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import Image from "next/image";
+import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { getRecipes } from "~/server/queries";
 
 export const dynamic = "force-dynamic";
@@ -10,33 +20,25 @@ async function Recipes() {
     <div className="flex flex-row space-x-6">
       {recipes.map((recipe) => {
         return (
-          <div
-            key={recipe.id}
-            className={"w-96 space-y-6 rounded-lg bg-slate-500 p-4 shadow-lg"}
-          >
-            <h2 className="text-2xl font-bold">{recipe.name}</h2>
-            <ul className="mt-4">
-              {recipe.ingredients.map((ingredient, index) => (
-                <li key={index}>
-                  {ingredient.quantity} {ingredient.name}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-4">
-              <h3 className="text-lg font-bold">Instructions</h3>
-              <ol className="mt-2 list-inside list-decimal">
-                {recipe.instructions.map((instruction) => (
-                  <li key={instruction.id}>{instruction.step}</li>
-                ))}
-              </ol>
-            </div>
-            <div className="mt-4">
-              <p>
-                Prep Time: {recipe.prepTime} | Cook Time: {recipe.cookTime} |
-                Servings: {recipe.servings}
-              </p>
-            </div>
-          </div>
+          <Card key={recipe.id}>
+            <CardHeader>
+              <CardTitle>{recipe.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Image
+                className="rounded-lg"
+                width={300}
+                height={300}
+                src="/placeholder.jpeg"
+                alt="placeholder"
+              />
+            </CardContent>
+            <CardFooter>
+              <CardDescription>
+                <Button variant="outline">Learn More</Button>
+              </CardDescription>
+            </CardFooter>
+          </Card>
         );
       })}
     </div>
