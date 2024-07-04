@@ -1,10 +1,16 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic";
 
 async function Recipes() {
+  const user = auth();
+
+  if (!user.userId) throw new Error("Unauthorized");
+
   const recipes = await db.query.recipe.findMany({
+    where: (recipes, { eq }) => eq(recipes.userId, user.userId),
     with: {
       ingredients: true,
       instructions: true,
